@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Book;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -13,10 +14,10 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
+    /*   public function __construct()
+    { 
         $this->middleware('auth');
-    }
+   /* }
 
     /**
      * Show the application dashboard.
@@ -32,4 +33,12 @@ class HomeController extends Controller
         return $users;
         //  return view('home');
     }*/
+
+    public function index()
+    {
+        $props = Book::with('author')->with('category')
+            ->with('user')->paginate(1);
+        dd($props);
+        return view('home', compact('props'));
+    }
 }
