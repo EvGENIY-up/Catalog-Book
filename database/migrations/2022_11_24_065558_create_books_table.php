@@ -19,10 +19,10 @@ return new class extends Migration
             $table->tinyInteger('year');
             $table->text('description');
             $table->text('img')->nullable();
-            $table->foreignId('author_id')->constrained('authors')->onUpdate('cascade')
-                ->onDelete('cascade');
-            $table->foreignId('category_id')->constrained('categories')->onUpdate('cascade')
-                ->onDelete('cascade');
+            $table->foreignId('author_id')->nullable()->constrained('authors')->onUpdate('cascade')
+                ->nullOnDelete();
+            $table->foreignId('category_id')->nullable()->constrained('categories')->onUpdate('cascade')
+                ->nullOnDelete();
             $table->foreignId('user_id')->constrained('users')->onUpdate('cascade')
                 ->onDelete('cascade');
             $table->timestamps();
