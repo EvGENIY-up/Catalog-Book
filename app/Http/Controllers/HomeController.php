@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -21,8 +23,13 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    /*public function index($count) //link?page=2
     {
-        return view('home');
-    }
+        $users =  User::where('id', 'LIKE', 2)->paginate($count);
+        foreach ($users as $book) {
+            $book->canUpdate = Auth::user()->can('update', $book);
+        }
+        return $users;
+        //  return view('home');
+    }*/
 }
