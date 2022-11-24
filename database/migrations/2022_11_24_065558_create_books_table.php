@@ -19,12 +19,12 @@ return new class extends Migration
             $table->tinyInteger('year');
             $table->text('description');
             $table->text('img')->nullable();
-            $table->unsignedBigInteger('author_id');
-            $table->foreign('author_id')->references('id')->on('authors')->cascadeOnUpdate()->nullOnDelete();
-            $table->unsignedBigInteger('category_id');
-            $table->foreign('category_id')->references('id')->on('categories')->cascadeOnUpdate()->nullOnDelete();
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->cascadeOnUpdate()->nullOnDelete();
+            $table->foreignId('author_id')->constrained('authors')->onUpdate('cascade')
+                ->onDelete('cascade');
+            $table->foreignId('category_id')->constrained('categories')->onUpdate('cascade')
+                ->onDelete('cascade');
+            $table->foreignId('user_id')->constrained('users')->onUpdate('cascade')
+                ->onDelete('cascade');
             $table->timestamps();
         });
     }
