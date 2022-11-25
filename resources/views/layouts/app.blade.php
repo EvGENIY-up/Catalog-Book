@@ -20,8 +20,8 @@
 
 <body>
     <div id="app">
-        <main class="py-4">
-            <ExampleComponent />
+        <main class="wrapper">
+            <header-component></header-component>
             @yield('content')
         </main>
     </div>

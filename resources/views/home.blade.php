@@ -1,4 +1,5 @@
 @extends('layouts.app')
-<div>Круто то как</div>
+
 @section('content')
+    <home-component></home-component>
 @endsection

@@ -3,11 +3,10 @@ import { createApp } from 'vue';
 
 const app = createApp({});
 
-import ExampleComponent from './components/ExampleComponent.vue';
-app.component('Test', ExampleComponent);
+import HomeComponent from './components/HomeComponent.vue';
+app.component('home-component', HomeComponent);
 
-Object.entries(import.meta.glob('./**/*.vue', { eager: true })).forEach(([path, definition]) => {
-     app.component(path.split('/').pop().replace(/\.\w+$/, ''), definition.default);
- });
+import HeaderComponent from './components/layouts/HeaderComponent.vue';
+app.component('header-component', HeaderComponent);
 
 app.mount('#app');
