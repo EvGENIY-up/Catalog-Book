@@ -1,7 +1,7 @@
 <template>
 <div class="content mx-3">
 <div class="first d-flex justify-content-between">
-    <h1 class="content__title my-3">Все книги</h1>
+    <h1 class="content__title my-5">Все книги</h1>
     <div class="content__search">
         <div class="form-floating" height="10px">
             <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
@@ -17,12 +17,8 @@
         </div>
     </div>
 </div>
-<div class="d-flex flex-wrap">
-    <BookComponent/>
-    <BookComponent/>
-    <BookComponent/>
-    <BookComponent/>
-    <BookComponent/>
+<div class="d-flex flex-wrap justify-content-center mx-3" v-for="book in book_prop.data">
+    <BookComponent :author="book.author.fullname" :book_id="book.id" :category="book.category.title" :title="book.title" />
 </div>
 </div>
 </template>
@@ -34,8 +30,20 @@ export default {
 
     components: {
         BookComponent
+    },
+    props: [
+        'book_prop' 
+    ],
+    mounted() {
+        this.update()
+    },
+    methods: {
+        update: function () {
+            console.log(this.book_prop)
+        }
     }
 }
+
 </script>
 
 <style scoped>

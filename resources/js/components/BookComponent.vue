@@ -5,7 +5,7 @@
         <div className="d-flex">
             <div className="d-flex flex-column">
                 <span>Автор: {{author}}</span>
-                <b>Жанр: {{genre}}</b>
+                <b>Жанр: {{category}}</b>
             </div>
         </div>
 </div>
@@ -15,13 +15,12 @@
 export default {
     name: "BookComponent",
 
-    data() {
-        return {
-            title: 'Отцы и дети',
-            author: 'Тургенев',
-            genre:  'Рассказ'
-        }
-    }
+    props: [
+        'author',
+        'category',
+        'title',
+        'book_id'
+   ]
 }
 </script>
 

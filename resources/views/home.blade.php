@@ -1,5 +1,5 @@
 @extends('layouts.app')
 
 @section('content')
-    <home-component></home-component>
+    <home-component :book_prop="{{ json_encode($props) }}"></home-component>
 @endsection
