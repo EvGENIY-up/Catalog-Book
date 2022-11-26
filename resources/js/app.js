@@ -9,4 +9,7 @@ app.component('home-component', HomeComponent);
 import HeaderComponent from './components/layouts/HeaderComponent.vue';
 app.component('header-component', HeaderComponent);
 
+import SingleBook from './components/SingleBook.vue';
+app.component('single-book', SingleBook);
+
 app.mount('#app');

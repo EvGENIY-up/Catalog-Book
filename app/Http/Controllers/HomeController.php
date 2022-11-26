@@ -52,6 +52,9 @@ class HomeController extends Controller
     {
         $book = Book::with('author')->with('category')
             ->with('user')->find($id);
+        return view('book', [
+            'book' => $book
+        ]);
     }
 
     /**
