@@ -1,7 +1,7 @@
 <template>
 <div class="content mx-3">
 <div class="first d-flex justify-content-between">
-    <h1 class="content__title my-5">Все книги</h1>
+    <h1 class="content__title my-5">{{searchTitle()}}</h1>
     <div class="content__search">
         <div class="form-floating" height="10px">
             <select v-model="searchFilter" class="form-select" id="floatingSelect" aria-label="Floating label select example">
@@ -18,7 +18,7 @@
     </div>
 </div>
 <div class="d-flex flex-wrap justify-content-center mx-3">
-    <BookComponent v-for="book in bookList.data" @click="goToLink(book.id)" :author="book.author.fullname" :book_id="book.id" :category="book.category.title" :title="book.title" />
+    <BookComponent v-for="book in bookList.data" @click="goToLink(book.id)" :author="book.author.fullname" :book_id="book.id" :category="book.category.title" :title="book.title" class="cu-p" />
 </div>
 <div class="pagination justify-content-center d-flex">
     <a v-for="page in bookList.links" :href="page.url" type="button" class="btn btn-outline-primary" :class="{active: page.active}" :key="page.id" ref="buttonRefs">{{buttonLabel(page.label)}}</a>
@@ -42,7 +42,7 @@ export default {
           return {
             searchFilter: 1,
             bookList: this.book_prop,
-              searchString: '',
+            searchString: '',
             date:'Monday',
         } 
     },
@@ -71,6 +71,12 @@ export default {
             axios.get('http://127.0.0.1:8000/books?value=' + this.searchString + '&type=' + this.searchFilter).then((response) => {
                 this.bookList = response.data;
             });
+        },
+        searchTitle() {
+            if (this.searchString === '') {
+                return 'Все книги'
+            }
+            return 'Поиск по запросу: ' + this.searchString
         },
     },
     computed: {
