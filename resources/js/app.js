@@ -9,6 +9,9 @@ app.component('home-component', HomeComponent);
 import HeaderComponent from './components/layouts/HeaderComponent.vue';
 app.component('header-component', HeaderComponent);
 
+import FooterComponent from './components/layouts/FooterComponent.vue';
+app.component('footer-component', FooterComponent);
+
 import SingleBook from './components/SingleBook.vue';
 app.component('single-book', SingleBook);
 

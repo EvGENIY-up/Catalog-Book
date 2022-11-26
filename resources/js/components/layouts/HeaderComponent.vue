@@ -1,6 +1,6 @@
 <template>
 <div class="header d-flex justify-content-between m-4 border-bottom">
-    <div class="left-content d-flex">
+    <div @click="goToLink" class="left-content d-flex cu-p">
         <img src="img/book.svg" alt="Книжка" class="left-content__img" width="50px">
         <div class="name-content ms-3 mt-3">
             <h2 class="site-title">CATALOG-BOOK</h2>
@@ -17,6 +17,12 @@
 <script>
 export default {
     name: "HeaderComponent",
+
+    methods: {
+        goToLink(){
+            location.replace('/')
+        },
+    }
 }
 </script>
 

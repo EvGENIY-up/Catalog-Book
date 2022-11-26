@@ -23,6 +23,7 @@
         <main class="wrapper">
             <header-component></header-component>
             @yield('content')
+            <footer-component></footer-component>
         </main>
     </div>
 </body>
