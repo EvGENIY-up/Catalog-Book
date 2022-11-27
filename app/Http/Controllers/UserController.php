@@ -56,16 +56,19 @@ class UserController extends Controller
         $this->validator($dataRequest);
         $this->create($dataRequest);
         $this->login($request);
+        redirect('/');
     }
 
     public function auth(Request $request)
     {
         $this->validateLogin($request);
         $this->login($request);
+        redirect('/');
     }
 
     public function authOut(Request $request)
     {
         $this->logout($request);
+        redirect('/');
     }
 }

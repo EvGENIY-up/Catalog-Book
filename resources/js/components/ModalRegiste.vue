@@ -62,7 +62,9 @@ export default {
                 email: this.email,
                 password: this.password,
             }).then(res => {
-                console.log(res);
+                if (res.status === 200) {
+                    location.replace('/') 
+                }
             })
         }
     }

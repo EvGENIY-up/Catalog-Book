@@ -11,7 +11,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Нет</button>
-                <button type="button" class="btn btn-danger">Да</button>
+                <button @click="logOut()" type="submit" class="btn btn-danger">Да</button>
             </div>
             </div>
         </div>
@@ -33,9 +33,9 @@ export default {
         update: function () {
             console.log('Привет')
         },
-        createUser() {
-            axios.post('/registration').then(res => {
-                console.log(res);
+        logOut() {
+            axios.get('/out').then(res => {
+                res.status === 200 ? location.replace('/') : false
             })
         }
     }

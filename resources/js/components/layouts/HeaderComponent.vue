@@ -10,9 +10,10 @@
     <div class="right-content d-flex mt-4">
         <p v-if="user" class="login-name">{{user}}</p>
         <template v-else>
-            <button type="button" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#authModal">Вход</button>
-            <button type="button" class="btn btn-secondary mt-3" data-bs-toggle="modal" data-bs-target="#regisModal">Регистрация</button>
+            <button type="button" class="btn btn-primary mt-2 in-button" data-bs-toggle="modal" data-bs-target="#authModal">Вход</button>
+            <button type="button" class="btn btn-secondary mt-2 reg-button" data-bs-toggle="modal" data-bs-target="#regisModal">Регистрация</button>
         </template>
+        <button v-if="user" type="button" class="btn btn-dark mt-2 admin-button" data-bs-toggle="modal" data-bs-target="#authOutModal">Админ панель</button>
         <button v-if="user" type="button" class="btn btn-warning mt-2 out-button" data-bs-toggle="modal" data-bs-target="#authOutModal">Выход</button>
     </div>
     <ModalAuth/>
@@ -29,7 +30,8 @@ export default {
     name: "HeaderComponent",
 
     props: [
-        'user'
+        'user',
+        'admin'
     ],
 
     components: {

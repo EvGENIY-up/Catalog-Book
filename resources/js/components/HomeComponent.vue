@@ -36,7 +36,8 @@ export default {
         BookComponent
     },
     props: [
-        'book_prop' 
+        'book_prop',
+        'user',
     ],
       data() {
           return {

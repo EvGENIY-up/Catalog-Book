@@ -9,14 +9,14 @@
             <form>
                 <div class="modal-body">
                     <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">Email адресс (почта)</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                        <div id="emailHelp" class="form-text">Обратите внимание. Мы никогда не передадим вашу электронную почту кому-либо еще.</div>
+                        <label for="exampleInputEmail1" class="form-label">Email (почта)</label>
+                        <input v-model="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                        <div id="emailHelp" class="form-text">Введите ваш email</div>
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputPassword1" class="form-label">Пароль</label>
-                        <input type="password" class="form-control" id="exampleInputPassword1">
-                         <div id="passwordHelp" class="form-text">Пароль должен быть 8-20.</div>
+                        <input v-model="password" type="password" class="form-control" id="exampleInputPassword1">
+                         <div id="passwordHelp" class="form-text">Введите ваш пароль</div>
                     </div>
                     <div class="mb-3 form-check">
                         <input type="checkbox" class="form-check-input" id="exampleCheck1">
@@ -24,7 +24,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">Отправить</button>
+                    <button @click.prevent="defineUser" type="submit" class="btn btn-primary">Отправить</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
                 </div>
             </form>
@@ -36,6 +36,12 @@
 export default {
     name: "ModalAuth",
 
+    data() {
+        return {
+            email: null,
+            password: null,
+        }
+    },
     props: [
         'book_info',
     ],
@@ -45,6 +51,16 @@ export default {
     methods: {
         update: function () {
             console.log('Привет')
+        },
+        defineUser() {
+            axios.post('/auth', {
+                email: this.email,
+                password: this.password,
+            }).then(res => {
+                if (res.status === 200) {
+                    location.replace('/') 
+                }
+            })
         },
     }
 }
