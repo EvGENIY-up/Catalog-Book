@@ -9,14 +9,20 @@
     </div>
     <div class="right-content">
         <p class="login-name"></p>
-        <button type="button" class="btn btn-primary mt-3">Вход</button>
+        <button type="button" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#exampleModal">Вход</button>
     </div>
+    <ModalAuth/>
 </div>
 </template>
 
 <script>
+import ModalAuth from "../ModalAuth.vue"
 export default {
     name: "HeaderComponent",
+
+    components: {
+        ModalAuth
+    },
 
     methods: {
         goToLink(){

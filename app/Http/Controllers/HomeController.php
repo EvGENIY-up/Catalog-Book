@@ -42,7 +42,7 @@ class HomeController extends Controller
     public function index()
     {
         $props = Book::with('author')->with('category')
-            ->with('user')->paginate(10);
+            ->with('user')->paginate(6);
         return view('home', [
             'props' => $props
         ]);
