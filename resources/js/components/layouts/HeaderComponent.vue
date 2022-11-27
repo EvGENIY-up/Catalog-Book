@@ -8,9 +8,12 @@
         </div>
     </div>
     <div class="right-content">
-        <p class="login-name"></p>
-        <button type="button" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#authModal">Вход</button>
-        <button type="button" class="btn btn-secondary mt-3" data-bs-toggle="modal" data-bs-target="#regisModal">Регистрация</button>
+        <p v-if="user" class="login-name">{{user}}</p>
+        <template v-else>
+            <button type="button" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#authModal">Вход</button>
+            <button type="button" class="btn btn-secondary mt-3" data-bs-toggle="modal" data-bs-target="#regisModal">Регистрация</button>
+        </template>
+        <button v-if="user" type="button" class="btn btn-warning mt-3" data-bs-toggle="modal" data-bs-target="#authModal">Выход</button>
     </div>
     <ModalAuth/>
     <ModalRegiste/>
@@ -23,6 +26,10 @@ import ModalRegiste from "../ModalRegiste.vue"
 export default {
     name: "HeaderComponent",
 
+    props: [
+        'user'
+    ],
+
     components: {
         ModalAuth,
         ModalRegiste
@@ -32,7 +39,11 @@ export default {
         goToLink(){
             location.replace('/')
         },
-    }
+    },
+
+    mounted() {
+        console.log(this.user);
+    },
 }
 </script>
 

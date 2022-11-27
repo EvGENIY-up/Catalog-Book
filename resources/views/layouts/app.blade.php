@@ -21,7 +21,8 @@
 <body>
     <div id="app">
         <main class="wrapper">
-            <header-component></header-component>
+            <header-component :user="{{ json_encode(Auth::check() ? Auth::user()->name : false) }}">
+            </header-component>
             @yield('content')
             <footer-component></footer-component>
         </main>

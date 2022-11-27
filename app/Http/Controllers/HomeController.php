@@ -44,7 +44,7 @@ class HomeController extends Controller
         $props = Book::with('author')->with('category')
             ->with('user')->paginate(6);
         return view('home', [
-            'props' => $props
+            'props' => $props,
         ]);
     }
 

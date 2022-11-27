@@ -19,3 +19,4 @@ Auth::routes();
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/books', [App\Http\Controllers\HomeController::class, 'search'])->name('book.search');
 Route::get('/book/{id}', [App\Http\Controllers\HomeController::class, 'getBook'])->name('book.index');
+Route::post('/registration', [App\Http\Controllers\UserController::class, 'registerAndAuth'])->name('user.create');
