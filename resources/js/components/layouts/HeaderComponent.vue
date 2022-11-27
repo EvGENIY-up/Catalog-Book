@@ -9,19 +9,23 @@
     </div>
     <div class="right-content">
         <p class="login-name"></p>
-        <button type="button" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#exampleModal">Вход</button>
+        <button type="button" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#authModal">Вход</button>
+        <button type="button" class="btn btn-secondary mt-3" data-bs-toggle="modal" data-bs-target="#regisModal">Регистрация</button>
     </div>
     <ModalAuth/>
+    <ModalRegiste/>
 </div>
 </template>
 
 <script>
 import ModalAuth from "../ModalAuth.vue"
+import ModalRegiste from "../ModalRegiste.vue"
 export default {
     name: "HeaderComponent",
 
     components: {
-        ModalAuth
+        ModalAuth,
+        ModalRegiste
     },
 
     methods: {
