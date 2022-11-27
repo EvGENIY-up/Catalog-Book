@@ -63,4 +63,9 @@ class UserController extends Controller
         $this->validateLogin($request);
         $this->login($request);
     }
+
+    public function authOut(Request $request)
+    {
+        $this->logout($request);
+    }
 }
