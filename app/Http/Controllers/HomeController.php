@@ -63,8 +63,12 @@ class HomeController extends Controller
     {
         $book = Book::with('author')->with('category')
             ->with('user')->find($id);
+        $authors = $this->getAuthorsAndCategories()['authors'];
+        $categories = $this->getAuthorsAndCategories()['categories'];
         return view('book', [
-            'book' => $book
+            'book' => $book,
+            'categories' => $categories,
+            'authors' => $authors
         ]);
     }
 
@@ -72,7 +76,7 @@ class HomeController extends Controller
     {
         if (Auth::check()) {
             $request->validate([
-                'title' => 'required|string',
+                'title' => 'required|string|max:150',
                 'year' => 'required|integer|max_digits:2022',
                 'description' => 'required|string|max:2000',
                 'author_id' => 'required|integer|exists:authors,id',
@@ -91,6 +95,31 @@ class HomeController extends Controller
             $newBook->save();
         } else {
             return response('Вы не авторизованы', 432);
+        }
+    }
+
+    public function updateBook(Request $request)
+    {
+        $request->validate([
+            'id' => 'required|exists:books,id',
+            'title' => 'required|string|max:150',
+            'year' => 'required|integer|max_digits:2022',
+            'description' => 'required|string|max:2000',
+            'author_id' => 'required|integer|exists:authors,id',
+            'category_id' => 'required|integer|exists:categories,id',
+        ]);
+        $book = Book::find($request->id);
+        if (Auth::user()->id === $book->user_id || Auth::user()->is_admin) {
+            $editBook = [
+                'title' => $request->title,
+                'year' => $request->year,
+                'description' => $request->description,
+                'author_id' => $request->author_id,
+                'category_id' => $request->category_id,
+            ];
+            $book->update($editBook);
+        } else {
+            return response('У вас нет прав администратора', 432);
         }
     }
 
@@ -114,7 +143,7 @@ class HomeController extends Controller
             $filteredBooks = $filteredBooks->where('title', 'LIKE', "%$request->value%");
         }
 
-        $filteredBooks = $filteredBooks->paginate(2);
+        $filteredBooks = $filteredBooks->paginate(6);
 
         return $filteredBooks;
     }

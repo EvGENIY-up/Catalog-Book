@@ -1,9 +1,9 @@
 <template>
-   <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+   <div class="modal fade" id="changeBookModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Добавление книги</h1>
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Редактирование существующей книги</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form>
@@ -42,7 +42,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button @click.prevent="createBook" type="submit" class="btn btn-primary">Добавить</button>
+                    <button @click.prevent="updateBook" type="submit" class="btn btn-primary">Редактировать</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
                 </div>
             </form>
@@ -52,30 +52,40 @@
 </template>
 <script>
 export default {
-    name: "AddBook",
+    name: "ChangeBook",
 
     data() {
         return {
-            author_id: null,
-            category_id: null,
-            title: null,
-            year: null,
-            description: null,
+            author_id: this.defaultIdAuthor,
+            category_id: this.defaultIdCategory,
+            title: this.defaultTitle,
+            year: this.defaultYear,
+            description: this.defaultDescription,
             message: '',
         }
     },
     props: [
         'authors',
         'categories',
+        'id',
+        'defaultIdAuthor',
+        'defaultIdCategory',
+        'defaultAuthor',
+        'defaultCategory',
+        'defaultTitle',
+        'defaultYear',
+        'defaultDescription',
     ],
     mounted() {
         this.update()
+        console.log(this.defaultDescription);
     },
     methods: {
         update: function () {
         },
-        createBook() {
-            axios.post('/add', {
+        updateBook() {
+            axios.post('/update', {
+                id: this.id,
                 title: this.title,
                 year: Number(this.year),
                 description: this.description,
@@ -83,7 +93,7 @@ export default {
                 category_id: Number(this.category_id)
             }).then(res => {
                 if (res.status === 200) {
-                    this.message = 'Вы успешно добавили книгу'
+                    this.message = 'Кннига была отредактирована'
                 }
                 else {
                     this.message = res.message

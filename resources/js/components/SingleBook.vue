@@ -10,29 +10,40 @@
         </div>
     </div>
     <div class="change-book d-flex justify-content-end mx-3">
-        <button  type="button" class="btn btn-primary">Редактировать</button>
-        <button  type="button" class="btn btn-danger mx-2">Удалить</button>
+        <button v-if="this.book_info.user_id === this.user_id || this.admin" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#changeBookModal">Редактировать</button>
+        <button v-if="this.book_info.user_id === this.user_id || this.admin" type="button" class="btn btn-danger mx-2">Удалить</button>
     </div>
+    <ChangeBook :defaultTitle="book_info.title" :defaultYear="book_info.year"
+    :defaultDescription="book_info.description" :defaultCategory="book_info.category.title"
+    :defaultAuthor="book_info.author.fullname" :defaultIdAuthor="book_info.author.id"
+    :defaultIdCategory="book_info.category.id" :id="book_info.id" :authors="this.authors" :categories="this.categories"/>
 </template>
 <script>
+
+import ChangeBook from "./ChangeBook.vue"
 export default {
     name: "SingleBook",
+    components: {
+        ChangeBook,
+    },
 
     props: [
         'book_info',
         'user_id',
         'admin',
+        'categories',
+        'authors',
     ],
     mounted() {
         this.update()
     },
     methods: {
         update: function () {
-            console.log(this.book_info)
+            
         },
         typeUser() {
-            if (book_info.user_id === user_id || admin) {
-                return true
+            if (this.book_info.user_id === this.user_id) {
+                
             }
             else {
                 return false
