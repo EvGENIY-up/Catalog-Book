@@ -49,7 +49,7 @@ export default {
         },
         deleteAuthor() {
             axios.post('/admin/deleteAuthor', {
-                id: this.id,
+                id: Number(this.id),
             }).then(res => {
                 if (res.status === 200) {
                     this.message = 'Вы успешно удалили автора'

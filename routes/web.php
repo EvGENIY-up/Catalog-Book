@@ -28,3 +28,4 @@ Route::post('/registration', [App\Http\Controllers\UserController::class, 'regis
 Route::get('/admin', [App\Http\Controllers\AdminController::class, 'adminPanel'])->name('admin');
 Route::post('/admin/addAuthor', [App\Http\Controllers\AdminController::class, 'addAuthor'])->name('author.create');
 Route::post('/admin/updateAuthor', [App\Http\Controllers\AdminController::class, 'updateAuthor'])->name('author.update');
+Route::post('/admin/deleteAuthor', [App\Http\Controllers\AdminController::class, 'deleteAuthor'])->name('author.delete');

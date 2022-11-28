@@ -58,4 +58,17 @@ class AdminController extends Controller
             return response('У вас нет прав администратора', 432);
         }
     }
+
+    public function deleteAuthor(Request $request)
+    {
+        $request->validate([
+            'id' => 'required|integer|exists:authors,id',
+        ]);
+        $author = Author::find($request->id);
+        if (Auth::user()->is_admin) {
+            $author->delete();
+        } else {
+            return response('У вас нет прав администратора', 432);
+        }
+    }
 }
