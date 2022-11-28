@@ -13,7 +13,7 @@
             <button type="button" class="btn btn-primary mt-2 in-button" data-bs-toggle="modal" data-bs-target="#authModal">Вход</button>
             <button type="button" class="btn btn-secondary mt-2 reg-button" data-bs-toggle="modal" data-bs-target="#regisModal">Регистрация</button>
         </template>
-        <button v-if="admin" type="button" class="btn btn-dark mt-2 admin-button" data-bs-toggle="modal" data-bs-target="#authOutModal">Админ панель</button>
+        <button v-if="admin" @click="adminPanel" type="button" class="btn btn-dark mt-2 admin-button" data-bs-toggle="modal" data-bs-target="#authOutModal">Админ панель</button>
         <button v-if="user" type="button" class="btn btn-warning mt-2 out-button" data-bs-toggle="modal" data-bs-target="#authOutModal">Выход</button>
     </div>
     <ModalAuth/>
@@ -26,6 +26,7 @@
 import ModalAuth from "../ModalAuth.vue"
 import ModalRegiste from "../ModalRegiste.vue"
 import ModalAuthOut from "../ModalAuthOut.vue"
+import axios from "axios"
 export default {
     name: "HeaderComponent",
 
@@ -44,6 +45,13 @@ export default {
         goToLink(){
             location.replace('/')
         },
+        adminPanel() {
+            axios.get('/admin').then((res) => {
+                if (res.status === 432) {
+                    location.replace('/')
+                }
+            });
+        }
     },
 
     mounted() {

@@ -25,3 +25,4 @@ Route::post('/delete', [App\Http\Controllers\HomeController::class, 'deleteBook'
 Route::get('/out', [App\Http\Controllers\UserController::class, 'authOut'])->name('user.out');
 Route::post('/auth', [App\Http\Controllers\UserController::class, 'auth'])->name('user.auth');
 Route::post('/registration', [App\Http\Controllers\UserController::class, 'registerAndAuth'])->name('user.create');
+Route::get('/admin', [App\Http\Controllers\AdminController::class, 'adminPanel'])->name('admin');

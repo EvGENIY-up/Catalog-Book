@@ -15,4 +15,7 @@ app.component('footer-component', FooterComponent);
 import SingleBook from './components/SingleBook.vue';
 app.component('single-book', SingleBook);
 
+import Admin from './components/Admin.vue';
+app.component('admin-component', Admin);
+
 app.mount('#app');
