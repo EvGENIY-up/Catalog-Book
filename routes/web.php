@@ -29,3 +29,6 @@ Route::get('/admin', [App\Http\Controllers\AdminController::class, 'adminPanel']
 Route::post('/admin/addAuthor', [App\Http\Controllers\AdminController::class, 'addAuthor'])->name('author.create');
 Route::post('/admin/updateAuthor', [App\Http\Controllers\AdminController::class, 'updateAuthor'])->name('author.update');
 Route::post('/admin/deleteAuthor', [App\Http\Controllers\AdminController::class, 'deleteAuthor'])->name('author.delete');
+Route::post('/admin/addCategory', [App\Http\Controllers\AdminController::class, 'addCategory'])->name('category.create');
+Route::post('/admin/updateCategory', [App\Http\Controllers\AdminController::class, 'updateCategory'])->name('category.update');
+Route::post('/admin/deleteCategory', [App\Http\Controllers\AdminController::class, 'deleteCategory'])->name('category.delete');
