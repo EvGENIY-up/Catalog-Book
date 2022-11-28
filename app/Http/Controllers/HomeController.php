@@ -101,7 +101,7 @@ class HomeController extends Controller
     public function updateBook(Request $request)
     {
         $request->validate([
-            'id' => 'required|exists:books,id',
+            'id' => 'required|integer|exists:books,id',
             'title' => 'required|string|max:150',
             'year' => 'required|integer|max_digits:2022',
             'description' => 'required|string|max:2000',
@@ -118,6 +118,19 @@ class HomeController extends Controller
                 'category_id' => $request->category_id,
             ];
             $book->update($editBook);
+        } else {
+            return response('У вас нет прав администратора', 432);
+        }
+    }
+
+    public function deleteBook(Request $request)
+    {
+        $request->validate([
+            'id' => 'required|integer|exists:books,id',
+        ]);
+        $book = Book::find($request->id);
+        if (Auth::user()->id === $book->user_id || Auth::user()->is_admin) {
+            $book->delete();
         } else {
             return response('У вас нет прав администратора', 432);
         }

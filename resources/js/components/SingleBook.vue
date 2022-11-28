@@ -11,21 +11,25 @@
     </div>
     <div class="change-book d-flex justify-content-end mx-3">
         <button v-if="this.book_info.user_id === this.user_id || this.admin" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#changeBookModal">Редактировать</button>
-        <button v-if="this.book_info.user_id === this.user_id || this.admin" type="button" class="btn btn-danger mx-2">Удалить</button>
+        <button v-if="this.book_info.user_id === this.user_id || this.admin" type="button" class="btn btn-danger mx-2" data-bs-toggle="modal" data-bs-target="#deleteBookModal">Удалить</button>
     </div>
     <ChangeBook :defaultTitle="book_info.title" :defaultYear="book_info.year"
     :defaultDescription="book_info.description" :defaultCategory="book_info.category.title"
     :defaultAuthor="book_info.author.fullname" :defaultIdAuthor="book_info.author.id"
     :defaultIdCategory="book_info.category.id" :id="book_info.id" :authors="this.authors" :categories="this.categories"/>
+    <DeleteBook :id="book_info.id"/>
 </template>
 <script>
 
 import ChangeBook from "./ChangeBook.vue"
+import DeleteBook from "./DeleteBook.vue"
+
 export default {
     name: "SingleBook",
     components: {
-        ChangeBook,
-    },
+    ChangeBook,
+    DeleteBook,
+},
 
     props: [
         'book_info',

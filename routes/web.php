@@ -21,6 +21,7 @@ Route::get('/books', [App\Http\Controllers\HomeController::class, 'search'])->na
 Route::get('/book/{id}', [App\Http\Controllers\HomeController::class, 'getBook'])->name('book.index');
 Route::post('/add', [App\Http\Controllers\HomeController::class, 'addBook'])->name('book.create');
 Route::post('/update', [App\Http\Controllers\HomeController::class, 'updateBook'])->name('book.update');
+Route::post('/delete', [App\Http\Controllers\HomeController::class, 'deleteBook'])->name('book.delete');
 Route::get('/out', [App\Http\Controllers\UserController::class, 'authOut'])->name('user.out');
 Route::post('/auth', [App\Http\Controllers\UserController::class, 'auth'])->name('user.auth');
 Route::post('/registration', [App\Http\Controllers\UserController::class, 'registerAndAuth'])->name('user.create');
