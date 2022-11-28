@@ -85,4 +85,24 @@ class AdminController extends Controller
             return response('У вас нет полномочий администратора', 432);
         }
     }
+
+    public function updateCategory(Request $request)
+    {
+        $request->validate([
+            'id' => 'required|integer|exists:authors,id',
+            'title' => 'required|string|max:150',
+            'description' => 'required|string|max:500',
+
+        ]);
+        $category = Category::find($request->id);
+        if (Auth::user()->is_admin) {
+            $editCategory = [
+                'title' => $request->title,
+                'description' => $request->description,
+            ];
+            $category->update($editCategory);
+        } else {
+            return response('У вас нет прав администратора', 432);
+        }
+    }
 }

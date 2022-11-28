@@ -7,7 +7,7 @@
     </div>
     <div class="categories-panel d-flex my-5 justify-content-around">
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addCategoryModal">Добавить категории</button>
-        <button type="button" class="btn btn-secondary">Редактировать категории</button>
+        <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#editCategoryModal">Редактировать категории</button>
         <button type="button" class="btn btn-danger">Удалить категории</button>
     </div>
 </div>
@@ -15,6 +15,7 @@
 <EditAuthor :authors="authors"/>
 <DeleteAuthor :authors="authors"/>
 <AddCategory/>
+<EditCategory :categories="categories"/>
 </template>
 
 <script>
@@ -22,6 +23,7 @@ import AddAuthor from './AddAuthor.vue';
 import EditAuthor from './EditAuthor.vue';
 import DeleteAuthor from './DeleteAuthor.vue'
 import AddCategory from './AddCategory.vue';
+import EditCategory from './EditCategory.vue';
 
 
 export default {
@@ -31,6 +33,7 @@ export default {
         EditAuthor,
         DeleteAuthor,
         AddCategory,
+        EditCategory,
     },
 
     props: [
