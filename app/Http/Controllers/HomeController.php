@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Author;
 use App\Models\Book;
+use App\Models\Category;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
@@ -18,22 +20,26 @@ class HomeController extends Controller
     /*   public function __construct()
     { 
         $this->middleware('auth');
-   /* }
+    }*/
+
 
     /**
-     * Show the application dashboard.
+     * Приватная метод класса HomeController
+     * для получения всех авторов или категорий
      *
-     * @return \Illuminate\Contracts\Support\Renderable
+     * @return void
      */
-    /*public function index($count) //link?page=2
+    private function getAuthorsAndCategories()
     {
-        $users =  User::where('id', 'LIKE', 2)->paginate($count);
-        foreach ($users as $book) {
-            $book->canUpdate = Auth::user()->can('update', $book);
-        }
-        return $users;
-        //  return view('home');
-    }*/
+        $authors = Author::all();
+        $categories = Category::all();
+
+        return [
+            'categories' => $categories,
+            'authors' => $authors
+        ];
+    }
+
     /**
      * Основная страница каталога книг
      *
@@ -43,8 +49,12 @@ class HomeController extends Controller
     {
         $props = Book::with('author')->with('category')
             ->with('user')->paginate(6);
+        $authors = $this->getAuthorsAndCategories()['authors'];
+        $categories = $this->getAuthorsAndCategories()['categories'];
         return view('home', [
             'props' => $props,
+            'categories' => $categories,
+            'authors' => $authors
         ]);
     }
 

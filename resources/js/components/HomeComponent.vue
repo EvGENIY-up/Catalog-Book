@@ -18,7 +18,7 @@
     </div>
 </div>
 <button v-if="user" type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#addModal">Добавить книгу +</button>
-<AddBook/>
+<AddBook :authors="authors" :categories="categories"/>
 <div class="d-flex flex-wrap justify-content-center mx-3">
     <BookComponent v-for="book in bookList.data" @click="goToLink(book.id)" :author="book.author.fullname" :book_id="book.id" :category="book.category.title" :title="book.title" class="cu-p" />
 </div>
@@ -42,6 +42,8 @@ export default {
     props: [
         'book_prop',
         'user',
+        'authors',
+        'categories',
     ],
       data() {
           return {

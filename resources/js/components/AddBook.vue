@@ -10,36 +10,35 @@
                 <div class="modal-body">
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Выберите автора</label>
-                        <select class="form-select" aria-label="Default select example">
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
+                        <select v-model="author_id" class="form-select" aria-label="Default select example">
+                            <option v-for=" author in authors" :value ="author.id">{{author.fullname}}</option>
                         </select>
                         <div id="passwordHelp" class="form-text">Обязательное поле</div>
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputPassword1" class="form-label">Выберите жанр</label>
-                        <select class="form-select" aria-label="Default select example">
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
+                        <select v-model="category_id" class="form-select" aria-label="Default select example">
+                           <option v-for=" category in categories" :value ="category.id">{{category.title}}</option>
                         </select>
                         <div id="passwordHelp" class="form-text">Обязательное поле</div>
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Название книги</label>
-                        <input v-model="name" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                        <input v-model="title" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
                         <div id="emailHelp" class="form-text">Название должно быть уникальным</div>
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Год издания</label>
-                        <input v-model="name" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                        <input v-model="year" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
                         <div id="emailHelp" class="form-text">В формате от рождества христова (не больше 4 цифр)</div>
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Описание</label>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                        <textarea  v-model="description" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
                         <div id="emailHelp" class="form-text">Подробное описание, не больше 2000 символов</div>
+                    </div>
+                    <div class="mb-3">
+                        <p>{{message}}</p>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -53,31 +52,43 @@
 </template>
 <script>
 export default {
-    name: "ModalAuth",
+    name: "AddBook",
 
     data() {
         return {
-            email: null,
-            password: null,
+            author_id: null,
+            category_id: null,
+            title: null,
+            year: null,
+            description: null,
+            message: '',
         }
     },
     props: [
-        'book_info',
+        'authors',
+        'categories',
     ],
     mounted() {
         this.update()
     },
     methods: {
         update: function () {
-            console.log('Привет')
+            console.log(authors)
+            console.log(categories)
         },
         createBook() {
             axios.post('/auth', {
-                email: this.email,
-                password: this.password,
+                title: this.title,
+                year: this.year,
+                description: this.description,
+                author_id: this.author_id,
+                category_id: this.category_id
             }).then(res => {
                 if (res.status === 200) {
-                    location.replace('/') 
+                    this.message = 'Вы успешно добавили книгу'
+                }
+                else {
+                    this.message = res.message
                 }
             })
         },
