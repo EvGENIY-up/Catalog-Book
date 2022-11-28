@@ -27,3 +27,4 @@ Route::post('/auth', [App\Http\Controllers\UserController::class, 'auth'])->name
 Route::post('/registration', [App\Http\Controllers\UserController::class, 'registerAndAuth'])->name('user.create');
 Route::get('/admin', [App\Http\Controllers\AdminController::class, 'adminPanel'])->name('admin');
 Route::post('/admin/addAuthor', [App\Http\Controllers\AdminController::class, 'addAuthor'])->name('author.create');
+Route::post('/admin/updateAuthor', [App\Http\Controllers\AdminController::class, 'updateAuthor'])->name('author.update');

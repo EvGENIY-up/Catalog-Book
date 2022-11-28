@@ -37,4 +37,25 @@ class AdminController extends Controller
             return response('У вас нет полномочий администратора', 432);
         }
     }
+
+    public function updateAuthor(Request $request)
+    {
+        $request->validate([
+            'id' => 'required|integer|exists:authors,id',
+            'fullname' => 'required|string|max:150',
+            'country' => 'required|string|max:100',
+            'comment' => 'nullable|string|max:200',
+        ]);
+        $author = Author::find($request->id);
+        if (Auth::user()->is_admin) {
+            $editAuthor = [
+                'fullname' => $request->fullname,
+                'country' => $request->country,
+                'comment' => $request->comment,
+            ];
+            $author->update($editAuthor);
+        } else {
+            return response('У вас нет прав администратора', 432);
+        }
+    }
 }
