@@ -77,12 +77,12 @@ export default {
             console.log(categories)
         },
         createBook() {
-            axios.post('/auth', {
+            axios.post('/add', {
                 title: this.title,
-                year: this.year,
+                year: Number(this.year),
                 description: this.description,
-                author_id: this.author_id,
-                category_id: this.category_id
+                author_id: Number(this.author_id),
+                category_id: Number(this.category_id)
             }).then(res => {
                 if (res.status === 200) {
                     this.message = 'Вы успешно добавили книгу'

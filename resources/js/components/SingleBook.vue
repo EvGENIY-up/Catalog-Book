@@ -9,6 +9,10 @@
             <h5 class="description">Описание: {{book_info.description}} </h5>
         </div>
     </div>
+    <div class="change-book d-flex justify-content-end mx-3">
+        <button  type="button" class="btn btn-primary">Редактировать</button>
+        <button  type="button" class="btn btn-danger mx-2">Удалить</button>
+    </div>
 </template>
 <script>
 export default {
@@ -16,6 +20,8 @@ export default {
 
     props: [
         'book_info',
+        'user_id',
+        'admin',
     ],
     mounted() {
         this.update()
@@ -24,6 +30,14 @@ export default {
         update: function () {
             console.log(this.book_info)
         },
+        typeUser() {
+            if (book_info.user_id === user_id || admin) {
+                return true
+            }
+            else {
+                return false
+            }
+        }
     }
 }
 </script>

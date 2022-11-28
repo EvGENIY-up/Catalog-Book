@@ -6,6 +6,7 @@ use App\Models\Author;
 use App\Models\Book;
 use App\Models\Category;
 use App\Models\User;
+use GuzzleHttp\Psr7\Response;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -65,6 +66,32 @@ class HomeController extends Controller
         return view('book', [
             'book' => $book
         ]);
+    }
+
+    public function addBook(Request $request)
+    {
+        if (Auth::check()) {
+            $request->validate([
+                'title' => 'required|string',
+                'year' => 'required|integer|max_digits:2022',
+                'description' => 'required|string|max:2000',
+                'author_id' => 'required|integer|exists:authors,id',
+                'category_id' => 'required|integer|exists:categories,id',
+            ]);
+
+            $data = [
+                'title' => $request->title,
+                'year' => $request->year,
+                'description' => $request->description,
+                'author_id' => $request->author_id,
+                'category_id' => $request->category_id,
+                'user_id' => Auth::user()->id,
+            ];
+            $newBook = new Book($data);
+            $newBook->save();
+        } else {
+            return response('Вы не авторизованы', 432);
+        }
     }
 
     /**
