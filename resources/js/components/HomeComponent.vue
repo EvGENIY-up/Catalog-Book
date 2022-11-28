@@ -1,7 +1,7 @@
 <template>
 <div class="content mx-3">
 <div class="first d-flex justify-content-between">
-    <h1 class="content__title my-5">{{searchTitle()}}</h1>
+    <h1 class="content__title mt-5">{{searchTitle()}}</h1>
     <div class="content__search">
         <div class="form-floating" height="10px">
             <select v-model="searchFilter" class="form-select" id="floatingSelect" aria-label="Floating label select example">
@@ -10,13 +10,15 @@
             </select>
         <label for="floatingSelect">Параметры поиска</label>
         </div>
-        <div className="search-block d-flex my-1">
+        <div className="search-block d-flex mt-1">
             <img src="/img/search.svg" alt="search" />
             <img  className="clear cu-p" src="/img/btn-remove.svg" alt="Remove" >
             <input @change="search" v-model="searchString" type="text" placeholder="Поиск..." >
         </div>
     </div>
 </div>
+<button v-if="user" type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#addModal">Добавить книгу +</button>
+<AddBook/>
 <div class="d-flex flex-wrap justify-content-center mx-3">
     <BookComponent v-for="book in bookList.data" @click="goToLink(book.id)" :author="book.author.fullname" :book_id="book.id" :category="book.category.title" :title="book.title" class="cu-p" />
 </div>
@@ -29,11 +31,13 @@
 <script>
 import axios from "axios"
 import BookComponent from "./BookComponent.vue"
+import AddBook from "./AddBook.vue"
 export default {
     name: "HomeComponent",
 
     components: {
-        BookComponent
+        BookComponent,
+        AddBook,
     },
     props: [
         'book_prop',
