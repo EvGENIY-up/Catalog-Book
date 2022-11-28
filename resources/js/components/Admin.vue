@@ -1,12 +1,28 @@
 <template>
-<div class="admin">
-    Типо админ страница
+<div class="admin my-5 d-flex flex-column">
+    <div class="authors-panel d-flex my-5 justify-content-around">
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addAuthorModal">Добавить авторов</button>
+        <button type="button" class="btn btn-secondary">Редактировать авторов</button>
+        <button type="button" class="btn btn-danger">Удалить авторов</button>
+    </div>
+    <div class="categories-panel d-flex my-5 justify-content-around">
+        <button type="button" class="btn btn-primary">Добавить категории</button>
+        <button type="button" class="btn btn-secondary">Редактировать категории</button>
+        <button type="button" class="btn btn-danger">Удалить категории</button>
+    </div>
 </div>
+<AddAuthor/>
 </template>
 
 <script>
+import AddAuthor from './AddAuthor.vue';
+
+
 export default {
-    name: "AdminComponent",
+    name: "Admin",
+    components: {
+        AddAuthor,
+    },
 
     props: [
         'authors',
