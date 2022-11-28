@@ -105,4 +105,17 @@ class AdminController extends Controller
             return response('У вас нет прав администратора', 432);
         }
     }
+
+    public function deleteCategory(Request $request)
+    {
+        $request->validate([
+            'id' => 'required|integer|exists:categories,id',
+        ]);
+        $category = Category::find($request->id);
+        if (Auth::user()->is_admin) {
+            $category->delete();
+        } else {
+            return response('У вас нет прав администратора', 432);
+        }
+    }
 }
