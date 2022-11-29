@@ -10,32 +10,37 @@
                 <div class="modal-body">
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Выберите автора</label>
-                        <select v-model="author_id" class="form-select" aria-label="Default select example">
+                        <select v-model="author_id" class="form-select" aria-label="Default select example" required>
                             <option v-for=" author in authors" :value ="author.id">{{author.fullname}}</option>
                         </select>
                         <div id="passwordHelp" class="form-text">Обязательное поле</div>
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputPassword1" class="form-label">Выберите жанр</label>
-                        <select v-model="category_id" class="form-select" aria-label="Default select example">
+                        <select v-model="category_id" class="form-select" aria-label="Default select example" required>
                            <option v-for=" category in categories" :value ="category.id">{{category.title}}</option>
                         </select>
                         <div id="passwordHelp" class="form-text">Обязательное поле</div>
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Название книги</label>
-                        <input v-model="title" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                        <div id="emailHelp" class="form-text">Название должно быть уникальным</div>
+                        <input v-model="title" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required>
+                        <div id="emailHelp" class="form-text" >Название должно быть уникальным</div>
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Год издания</label>
-                        <input v-model="year" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                        <div id="emailHelp" class="form-text">В формате от рождества христова (не больше 4 цифр)</div>
+                        <input v-model="year" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required pattern="^[ 0-9]+$">
+                        <div id="emailHelp" class="form-text" >В формате от рождества христова (не больше 4 цифр)</div>
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Описание</label>
-                        <textarea  v-model="description" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                        <div id="emailHelp" class="form-text">Подробное описание, не больше 2000 символов</div>
+                        <textarea  v-model="description" class="form-control" id="exampleFormControlTextarea1" rows="3" required></textarea>
+                        <div id="emailHelp" class="form-text" >Подробное описание, не больше 2000 символов</div>
+                    </div>
+                    <div class="large-12 medium-12 small-12 cell">
+                        <label>Обложка
+                            <input type="file" id="file" ref="file" v-on:change="handleFileUpload()"/>
+                        </label>
                     </div>
                     <div class="mb-3">
                         <p>{{message}}</p>
@@ -62,6 +67,8 @@ export default {
             year: null,
             description: null,
             message: '',
+            file: '',
+            img: '',
         }
     },
     props: [
@@ -79,8 +86,11 @@ export default {
                 title: this.title,
                 year: Number(this.year),
                 description: this.description,
+                img: this.file,
                 author_id: Number(this.author_id),
-                category_id: Number(this.category_id)
+                category_id: Number(this.category_id),
+              
+
             }).then(res => {
                 if (res.status === 200) {
                     this.message = 'Вы успешно добавили книгу'
@@ -89,6 +99,9 @@ export default {
                     this.message = res.message
                 }
             })
+        },
+        handleFileUpload(){
+            this.file = this.$refs.file.files[0];
         },
     }
 }

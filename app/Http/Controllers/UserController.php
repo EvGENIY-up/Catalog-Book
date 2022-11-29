@@ -45,7 +45,12 @@ class UserController extends Controller
             'password' => Hash::make($data['password']),
         ]);
     }
-
+    /**
+     * Регистрация и авторизация пользователя
+     *
+     * @param Request $request
+     * @return void
+     */
     public function registerAndAuth(Request $request)
     {
         $dataRequest = [
@@ -58,12 +63,24 @@ class UserController extends Controller
         $this->login($request);
     }
 
+    /**
+     * Авторизация пользователя
+     *
+     * @param Request $request
+     * @return void
+     */
     public function auth(Request $request)
     {
         $this->validateLogin($request);
         $this->login($request);
     }
 
+    /**
+     * Завершение сеанса пользователя
+     *
+     * @param Request $request
+     * @return void
+     */
     public function authOut(Request $request)
     {
         $this->logout($request);

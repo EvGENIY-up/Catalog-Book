@@ -9,6 +9,13 @@ use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
+
+    /**
+     * Админ панель, доступна только администраторам
+     *
+     * @return view 
+     * @return response
+     */
     public function adminPanel()
     {
         if (Auth::user()->is_admin) {
@@ -23,6 +30,11 @@ class AdminController extends Controller
         }
     }
 
+    /**
+     * Добавление автора, доступно только администраторам
+     *
+     * @return response 
+     */
     public function addAuthor(Request $request)
     {
         if (Auth::user()->is_admin) {
@@ -38,6 +50,11 @@ class AdminController extends Controller
         }
     }
 
+    /**
+     * Обновление автора, доступно только администраторам
+     *
+     * @return response 
+     */
     public function updateAuthor(Request $request)
     {
         $request->validate([
@@ -59,6 +76,11 @@ class AdminController extends Controller
         }
     }
 
+    /**
+     * Удаление автора, доступно только администраторам
+     *
+     * @return response 
+     */
     public function deleteAuthor(Request $request)
     {
         $request->validate([
@@ -72,6 +94,11 @@ class AdminController extends Controller
         }
     }
 
+    /**
+     * Добавление категории, доступно только администраторам
+     *
+     * @return response 
+     */
     public function addCategory(Request $request)
     {
         if (Auth::user()->is_admin) {
@@ -86,6 +113,11 @@ class AdminController extends Controller
         }
     }
 
+    /**
+     * Обновление категории, доступно только администраторам
+     *
+     * @return response 
+     */
     public function updateCategory(Request $request)
     {
         $request->validate([
@@ -106,6 +138,11 @@ class AdminController extends Controller
         }
     }
 
+    /**
+     * Удаление категории, доступно только администраторам
+     *
+     * @return response 
+     */
     public function deleteCategory(Request $request)
     {
         $request->validate([

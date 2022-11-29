@@ -13,19 +13,9 @@ use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    /*   public function __construct()
-    { 
-        $this->middleware('auth');
-    }*/
-
 
     /**
-     * Приватная метод класса HomeController
+     * Приватный метод класса HomeController
      * для получения всех авторов или категорий
      *
      * @return void
@@ -58,7 +48,12 @@ class HomeController extends Controller
             'authors' => $authors
         ]);
     }
-
+    /**
+     * Получаем страницу книги по id
+     *
+     * @param integer $id
+     * @return book
+     */
     public function getBook($id)
     {
         $book = Book::with('author')->with('category')
@@ -72,6 +67,12 @@ class HomeController extends Controller
         ]);
     }
 
+    /**
+     * Добавление книги, доступно только авторизвованым пользователям
+     *
+     * @param Request $request
+     * @return response с резьлутатом выполнения
+     */
     public function addBook(Request $request)
     {
         if (Auth::check()) {
@@ -97,7 +98,13 @@ class HomeController extends Controller
             return response('Вы не авторизованы', 432);
         }
     }
-
+    /**
+     * Обновление книги, достпуно только добавившим её пользователем
+     * и администратором
+     *
+     * @param Request $request
+     * @return response с резьлутатом выполнения
+     */
     public function updateBook(Request $request)
     {
         $request->validate([
@@ -123,6 +130,13 @@ class HomeController extends Controller
         }
     }
 
+    /**
+     * Удаление книги, достпуно только добавившим её пользователем
+     * и администратором
+     *
+     * @param Request $request
+     * @return response с резьлутатом выполнения
+     */
     public function deleteBook(Request $request)
     {
         $request->validate([
