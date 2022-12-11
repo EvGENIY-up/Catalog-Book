@@ -25,10 +25,12 @@ Route::post('/delete', [App\Http\Controllers\HomeController::class, 'deleteBook'
 Route::get('/out', [App\Http\Controllers\UserController::class, 'authOut'])->name('user.out');
 Route::post('/auth', [App\Http\Controllers\UserController::class, 'auth'])->name('user.auth');
 Route::post('/registration', [App\Http\Controllers\UserController::class, 'registerAndAuth'])->name('user.create');
-Route::get('/admin', [App\Http\Controllers\AdminController::class, 'adminPanel'])->name('admin');
-Route::post('/admin/addAuthor', [App\Http\Controllers\AdminController::class, 'addAuthor'])->name('author.create');
-Route::post('/admin/updateAuthor', [App\Http\Controllers\AdminController::class, 'updateAuthor'])->name('author.update');
-Route::post('/admin/deleteAuthor', [App\Http\Controllers\AdminController::class, 'deleteAuthor'])->name('author.delete');
-Route::post('/admin/addCategory', [App\Http\Controllers\AdminController::class, 'addCategory'])->name('category.create');
-Route::post('/admin/updateCategory', [App\Http\Controllers\AdminController::class, 'updateCategory'])->name('category.update');
-Route::post('/admin/deleteCategory', [App\Http\Controllers\AdminController::class, 'deleteCategory'])->name('category.delete');
+Route::prefix('admin')->middleware(['CheckAdmin'])->group(function () {
+    Route::get('/', [App\Http\Controllers\AdminController::class, 'adminPanel'])->name('admin');
+    Route::post('/addAuthor', [App\Http\Controllers\AdminController::class, 'addAuthor'])->name('author.create');
+    Route::post('/updateAuthor', [App\Http\Controllers\AdminController::class, 'updateAuthor'])->name('author.update');
+    Route::post('/deleteAuthor', [App\Http\Controllers\AdminController::class, 'deleteAuthor'])->name('author.delete');
+    Route::post('/addCategory', [App\Http\Controllers\AdminController::class, 'addCategory'])->name('category.create');
+    Route::post('/updateCategory', [App\Http\Controllers\AdminController::class, 'updateCategory'])->name('category.update');
+    Route::post('/deleteCategory', [App\Http\Controllers\AdminController::class, 'deleteCategory'])->name('category.delete');
+});
