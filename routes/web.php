@@ -25,7 +25,7 @@ Route::post('/delete', [App\Http\Controllers\HomeController::class, 'deleteBook'
 Route::get('/out', [App\Http\Controllers\UserController::class, 'authOut'])->name('user.out');
 Route::post('/auth', [App\Http\Controllers\UserController::class, 'auth'])->name('user.auth');
 Route::post('/registration', [App\Http\Controllers\UserController::class, 'registerAndAuth'])->name('user.create');
-Route::prefix('admin')->middleware(['CheckAdmin'])->group(function () {
+Route::prefix('admin')->middleware(['admin'])->group(function () {
     Route::get('/', [App\Http\Controllers\AdminController::class, 'adminPanel'])->name('admin');
     Route::post('/addAuthor', [App\Http\Controllers\AdminController::class, 'addAuthor'])->name('author.create');
     Route::post('/updateAuthor', [App\Http\Controllers\AdminController::class, 'updateAuthor'])->name('author.update');

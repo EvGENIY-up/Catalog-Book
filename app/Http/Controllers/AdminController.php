@@ -18,16 +18,12 @@ class AdminController extends Controller
      */
     public function adminPanel()
     {
-        if (Auth::user()->is_admin) {
-            $authors = Author::all();
-            $categories = Category::all();
-            return view('admin', [
-                'categories' => $categories,
-                'authors' => $authors
-            ]);
-        } else {
-            response('Вы не админстратор', 432);
-        }
+        $authors = Author::all();
+        $categories = Category::all();
+        return view('admin', [
+            'categories' => $categories,
+            'authors' => $authors
+        ]);
     }
 
     /**
@@ -37,17 +33,13 @@ class AdminController extends Controller
      */
     public function addAuthor(Request $request)
     {
-        if (Auth::user()->is_admin) {
-            $dataAuthor = $request->validate([
-                'fullname' => 'required|string|max:150',
-                'country' => 'required|string|max:100',
-                'comment' => 'nullable|string|max:200',
-            ]);
-            $newBook = new Author($dataAuthor);
-            $newBook->save();
-        } else {
-            return response('У вас нет полномочий администратора', 432);
-        }
+        $dataAuthor = $request->validate([
+            'fullname' => 'required|string|max:150',
+            'country' => 'required|string|max:100',
+            'comment' => 'nullable|string|max:200',
+        ]);
+        $newBook = new Author($dataAuthor);
+        $newBook->save();
     }
 
     /**
@@ -64,16 +56,12 @@ class AdminController extends Controller
             'comment' => 'nullable|string|max:200',
         ]);
         $author = Author::find($request->id);
-        if (Auth::user()->is_admin) {
-            $editAuthor = [
-                'fullname' => $request->fullname,
-                'country' => $request->country,
-                'comment' => $request->comment,
-            ];
-            $author->update($editAuthor);
-        } else {
-            return response('У вас нет прав администратора', 432);
-        }
+        $editAuthor = [
+            'fullname' => $request->fullname,
+            'country' => $request->country,
+            'comment' => $request->comment,
+        ];
+        $author->update($editAuthor);
     }
 
     /**
@@ -87,11 +75,7 @@ class AdminController extends Controller
             'id' => 'required|integer|exists:authors,id',
         ]);
         $author = Author::find($request->id);
-        if (Auth::user()->is_admin) {
-            $author->delete();
-        } else {
-            return response('У вас нет прав администратора', 432);
-        }
+        $author->delete();
     }
 
     /**
@@ -101,16 +85,12 @@ class AdminController extends Controller
      */
     public function addCategory(Request $request)
     {
-        if (Auth::user()->is_admin) {
-            $dataCategory = $request->validate([
-                'title' => 'required|string|max:150',
-                'description' => 'required|string|max:500',
-            ]);
-            $newCategory = new Category($dataCategory);
-            $newCategory->save();
-        } else {
-            return response('У вас нет полномочий администратора', 432);
-        }
+        $dataCategory = $request->validate([
+            'title' => 'required|string|max:150',
+            'description' => 'required|string|max:500',
+        ]);
+        $newCategory = new Category($dataCategory);
+        $newCategory->save();
     }
 
     /**
@@ -121,21 +101,17 @@ class AdminController extends Controller
     public function updateCategory(Request $request)
     {
         $request->validate([
-            'id' => 'required|integer|exists:authors,id',
+            'id' => 'required|integer|exists:categories,id',
             'title' => 'required|string|max:150',
             'description' => 'required|string|max:500',
 
         ]);
         $category = Category::find($request->id);
-        if (Auth::user()->is_admin) {
-            $editCategory = [
-                'title' => $request->title,
-                'description' => $request->description,
-            ];
-            $category->update($editCategory);
-        } else {
-            return response('У вас нет прав администратора', 432);
-        }
+        $editCategory = [
+            'title' => $request->title,
+            'description' => $request->description,
+        ];
+        $category->update($editCategory);
     }
 
     /**
@@ -149,10 +125,6 @@ class AdminController extends Controller
             'id' => 'required|integer|exists:categories,id',
         ]);
         $category = Category::find($request->id);
-        if (Auth::user()->is_admin) {
-            $category->delete();
-        } else {
-            return response('У вас нет прав администратора', 432);
-        }
+        $category->delete();
     }
 }
