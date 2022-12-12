@@ -78,7 +78,7 @@ class HomeController extends Controller
         if (Auth::check()) {
             $request->validate([
                 'title' => 'required|string|max:150',
-                'year' => 'required|integer|max_digits:2022',
+                'year' => 'required|integer|max_digits:4',
                 'description' => 'required|string|max:2000',
                 'author_id' => 'required|integer|exists:authors,id',
                 'category_id' => 'required|integer|exists:categories,id',
