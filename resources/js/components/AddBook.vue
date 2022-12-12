@@ -24,12 +24,12 @@
                     </div>
                     <div class="mb-3">
                         <label for="adBooklName" class="form-label">Название книги</label>
-                        <input v-model="title" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="addBookName" required>
+                        <input v-model="title" type="text" class="form-control" id="adBooklName" aria-describedby="addBookName" required>
                         <div class="form-text" >Название должно быть уникальным</div>
                     </div>
                     <div class="mb-3">
                         <label for="addBookYear" class="form-label">Год издания</label>
-                        <input v-model="year" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="addBookYear" required pattern="^[ 0-9]+$">
+                        <input v-model="year" type="text" class="form-control" id="addBookYear" aria-describedby="addBookYear" required pattern="^[ 0-9]+$">
                         <div class="form-text" >В формате от рождества христова (не больше 4 цифр)</div>
                     </div>
                     <div class="mb-3">
@@ -43,7 +43,7 @@
                         </label>
                     </div>
                     <div class="mb-3">
-                        <p>{{message}}</p>
+                        <p class="fs-5 d-flex justify-content-center mt-2" :class="{'text-danger': hasError, 'text-success': noError}">{{message}}</p>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -69,6 +69,8 @@ export default {
             message: '',
             file: '',
             img: '',
+            noError: true,
+            hasError: false,
         }
     },
     props: [
@@ -89,14 +91,23 @@ export default {
                 img: this.file,
                 author_id: Number(this.author_id),
                 category_id: Number(this.category_id),
-              
-
-            }).then(res => {
-                if (res.status === 200) {
-                    this.message = 'Вы успешно добавили книгу'
+            }).then(response => {
+                if (response.status === 200) {
+                    this.noError = true
+                    this.hasError = false
+                    this.message = 'Вы успешно добавили книгу';
+                }
+            }).catch(error => {
+                if (error.response) {
+                    this.noError = false
+                    this.hasError = true
+                    this.message = error.response.data.message;
+                    console.log(error.response.data.message);
                 }
                 else {
-                    this.message = res.message
+                    this.noError = false
+                    this.hasError = true
+                    this.message = 'Ошибка на стороне сервера';
                 }
             })
         },
