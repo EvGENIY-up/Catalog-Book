@@ -1,22 +1,22 @@
 <template>
-   <div class="modal fade" id="addCategoryModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+   <div class="modal fade" id="addCategoryModal" tabindex="-1" aria-labelledby="addCategoryModal" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Добавление категории</h1>
+                <h1 class="modal-title fs-5" id="addCategoryTitle">Добавление категории</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form>
                 <div class="modal-body">
                     <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">Название категории</label>
-                        <input v-model="title" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                        <div id="emailHelp" class="form-text">Название должно быть уникальным. Обязательное поле</div>
+                        <label for="addCategoryName" class="form-label">Название категории</label>
+                        <input v-model="title" type="text" class="form-control" id="addCategoryName" aria-describedby="addCategoryName">
+                        <div class="form-text">Название должно быть уникальным. Обязательное поле</div>
                     </div>
                     <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">Описание</label>
-                        <input v-model="description" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                        <div id="emailHelp" class="form-text">Обязательное поле</div>
+                        <label for="addCategoryDescription" class="form-label">Описание</label>
+                        <input v-model="description" type="text" class="form-control" id="addCategoryDescription" aria-describedby="addCategoryDescription">
+                        <div class="form-text">Обязательное поле</div>
                     </div>
                     <div class="mb-3">
                         <p>{{message}}</p>

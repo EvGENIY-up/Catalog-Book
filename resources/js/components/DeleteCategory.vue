@@ -1,19 +1,19 @@
 <template>
-   <div class="modal fade" id="deleteCategoryModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+   <div class="modal fade" id="deleteCategoryModal" tabindex="-1" aria-labelledby="deleteCategoryModal" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Удаление категории</h1>
+                <h1 class="modal-title fs-5" id="deleteCategoryTitle">Удаление категории</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form>
                 <div class="modal-body">
                      <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">Выберите категорию</label>
+                        <label for="deleteCategoryChoiceCategory" class="form-label">Выберите категорию</label>
                         <select v-model="id" class="form-select" aria-label="Default select example">
                             <option v-for=" category in categories" :value ="category.id">{{category.title}}</option>
                         </select>
-                        <div id="passwordHelp" class="form-text">Обязательное поле</div>
+                        <div class="form-text">Обязательное поле</div>
                     </div>
                     <div class="mb-3">
                         <p>{{message}}</p>

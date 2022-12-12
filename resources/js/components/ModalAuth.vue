@@ -1,26 +1,26 @@
 <template>
-   <div class="modal fade" id="authModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+   <div class="modal fade" id="authModal" tabindex="-1" aria-labelledby="authModal" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Авторизация</h1>
+                <h1 class="modal-title fs-5" id="authModalTitle">Авторизация</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form>
                 <div class="modal-body">
                     <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">Email (почта)</label>
-                        <input v-model="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                        <div id="emailHelp" class="form-text">Введите ваш email</div>
+                        <label for="authModalEmail" class="form-label">Email (почта)</label>
+                        <input v-model="email" type="email" class="form-control" id="authModalEmail" aria-describedby="authModalEmail">
+                        <div class="form-text">Введите ваш email</div>
                     </div>
                     <div class="mb-3">
-                        <label for="exampleInputPassword1" class="form-label">Пароль</label>
-                        <input v-model="password" type="password" class="form-control" id="exampleInputPassword1">
-                         <div id="passwordHelp" class="form-text">Введите ваш пароль</div>
+                        <label for="authModalPassword" class="form-label">Пароль</label>
+                        <input v-model="password" type="password" class="form-control" id="authModalPassword">
+                         <div class="form-text">Введите ваш пароль</div>
                     </div>
                     <div class="mb-3 form-check">
-                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                        <label class="form-check-label" for="exampleCheck1">Запопнить меня</label>
+                        <input type="checkbox" class="form-check-input" id="authModalRememberMe">
+                        <label class="form-check-label" for="authModalRememberMe">Запопнить меня</label>
                     </div>
                 </div>
                 <div class="modal-footer">

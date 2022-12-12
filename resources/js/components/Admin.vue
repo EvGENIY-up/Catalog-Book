@@ -42,7 +42,12 @@ export default {
     props: [
         'authors',
         'categories',
-   ]
+    ],
+
+    mounted() {
+        console.log(this.authors),
+        console.log(this.categories)
+    },
 }
 </script>
 
