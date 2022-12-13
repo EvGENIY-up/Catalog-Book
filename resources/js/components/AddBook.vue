@@ -63,7 +63,9 @@ export default {
     data() {
         return {
             formData: {
-                displayFileName: null,
+                displayFileSize: null,
+                linkFileBase64: null,
+                file: null,
             },
             author_id: null,
             category_id: null,
@@ -84,11 +86,19 @@ export default {
     mounted() {
     },
     methods: {
+        convertFileToLink(file) {
+            const reader = new FileReader();
+            reader.onload = (event) => {
+                this.formData.linkFileBase64 = event.target.result
+            };
+            reader.readAsDataURL(file);
+        },
         onFileChange(event) {
             if (event.target.files && event.target.files.length) {
                 let file = event.target.files[0];
-
-                this.formData.displayFileName = '(' + this.calcSize(file.size) + 'Kb)';
+                this.formData.file = file;
+                this.formData.displayFileSize = '(' + this.calcSize(file.size) + 'Kb)';
+                this.convertFileToLink(this.formData.file);
             }
         },
         calcSize(size) {
@@ -99,7 +109,7 @@ export default {
                 title: this.title,
                 year: Number(this.year),
                 description: this.description,
-                img: this.file,
+                img: this.formData.linkFileBase64,
                 author_id: Number(this.author_id),
                 category_id: Number(this.category_id),
             }).then(response => {
@@ -121,9 +131,6 @@ export default {
                     this.message = 'Ошибка на стороне сервера';
                 }
             })
-        },
-        handleFileUpload(){
-            this.file = this.$refs.file.files[0];
         },
     }
 }
