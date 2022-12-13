@@ -40,7 +40,7 @@
                     <div class="large-12 medium-12 small-12 cell">
                         <label class="d-flex">
                             <input type="file" id="fileBook" name="fileBook" accept=".jpg, .jpeg, .png" ref="fulpoad" @change="onFileChange"/>
-                            <input class="sizeImg" v-model="formData.displayFileName" type="text" readonly/>
+                            <input class="sizeImg" v-model="formData.displayFileSize" type="text" readonly/>
                         </label>
                     </div>
                     <div class="mb-3">

@@ -77,9 +77,10 @@ class HomeController extends Controller
     {
         if (Auth::check()) {
             $request->validate([
-                'title' => 'required|string|max:150',
+                'title' => 'required|unique:books|string|max:150',
                 'year' => 'required|integer|max_digits:4',
                 'description' => 'required|string|max:2000',
+                'img' => 'nullable|string',
                 'author_id' => 'required|integer|exists:authors,id',
                 'category_id' => 'required|integer|exists:categories,id',
             ]);
@@ -88,6 +89,7 @@ class HomeController extends Controller
                 'title' => $request->title,
                 'year' => $request->year,
                 'description' => $request->description,
+                'img' => $request->img,
                 'author_id' => $request->author_id,
                 'category_id' => $request->category_id,
                 'user_id' => Auth::user()->id,
@@ -110,7 +112,7 @@ class HomeController extends Controller
         $request->validate([
             'id' => 'required|integer|exists:books,id',
             'title' => 'required|string|max:150',
-            'year' => 'required|integer|max_digits:2022',
+            'year' => 'required|integer|max_digits:4',
             'description' => 'required|string|max:2000',
             'author_id' => 'required|integer|exists:authors,id',
             'category_id' => 'required|integer|exists:categories,id',
