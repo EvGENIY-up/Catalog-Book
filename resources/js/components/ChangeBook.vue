@@ -38,7 +38,7 @@
                         <div class="form-text">Подробное описание, не больше 2000 символов</div>
                     </div>
                     <div class="mb-3">
-                        <p>{{message}}</p>
+                        <p class="fs-5 d-flex justify-content-center mt-2" :class="{'text-danger': hasError, 'text-success': noError}">{{message}}</p>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -62,6 +62,8 @@ export default {
             year: this.defaultYear,
             description: this.defaultDescription,
             message: '',
+            noError: true,
+            hasError: false,
         }
     },
     props: [
@@ -95,8 +97,17 @@ export default {
                 if (res.status === 200) {
                     this.message = 'Кннига была отредактирована'
                 }
+            }).catch(error => {
+                if (error.response) {
+                    this.noError = false
+                    this.hasError = true
+                    this.message = error.response.data.message;
+                    console.log(error.response.data.message);
+                }
                 else {
-                    this.message = res.message
+                    this.noError = false
+                    this.hasError = true
+                    this.message = 'Ошибка на стороне сервера';
                 }
             })
         },

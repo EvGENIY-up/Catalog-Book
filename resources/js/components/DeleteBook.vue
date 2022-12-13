@@ -8,7 +8,7 @@
             </div>
             <div class="modal-body">
                 Вы уверены, что хоите удалить эту книгу?
-                <p>{{this.message}}</p>
+                <p class="fs-5 d-flex justify-content-center mt-2" :class="{'text-danger': hasError, 'text-success': noError}">{{message}}</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Нет</button>
@@ -29,7 +29,9 @@ export default {
     ],
     data() {
         return {
-            message: "У вас нет прав Администратора"
+            message: '',
+            noError: true,
+            hasError: false,
         }
     },
     mounted() {
@@ -46,7 +48,7 @@ export default {
                     location.replace('/');
                 }
                 else {
-                    this.message = res.message
+                    this.message = "У вас нет прав Администратора"
                 }
             })
         }

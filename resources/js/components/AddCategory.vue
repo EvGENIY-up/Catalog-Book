@@ -19,7 +19,7 @@
                         <div class="form-text">Обязательное поле</div>
                     </div>
                     <div class="mb-3">
-                        <p>{{message}}</p>
+                        <p class="fs-5 d-flex justify-content-center mt-2" :class="{'text-danger': hasError, 'text-success': noError}">{{message}}</p>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -40,6 +40,8 @@ export default {
             title: null,
             description: null,
             message: '',
+            noError: true,
+            hasError: false,
         }
     },
     props: [
@@ -58,8 +60,17 @@ export default {
                 if (res.status === 200) {
                     this.message = 'Вы успешно добавили категорию'
                 }
+            }).catch(error => {
+                if (error.response) {
+                    this.noError = false
+                    this.hasError = true
+                    this.message = error.response.data.message;
+                    console.log(error.response.data.message);
+                }
                 else {
-                    this.message = res.message
+                    this.noError = false
+                    this.hasError = true
+                    this.message = 'Ошибка на стороне сервера';
                 }
             })
         },
