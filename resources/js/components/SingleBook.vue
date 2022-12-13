@@ -1,6 +1,7 @@
 <template>
     <div class="book-content d-flex mx-4 my-4">
-        <img src="/img/book-img.png" width="370" height="600" alt="Обложка книги" class="book-content__img">
+        <img v-if="!book_info.img" src="/img/book-img.png" width="370" height="600" alt="Обложка книги" class="book-content__img">
+        <img v-else :src="book_info.img" width="370" height="600" alt="Обложка книги" class="book-content__img">
         <div class="content-block d mx-5 my-5 ">
             <h3 class="title">{{book_info.title}}</h3>
             <p class="author">Автор: {{book_info.author.fullname}}</p>

@@ -20,7 +20,7 @@
 <button v-if="user" type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#addModal">Добавить книгу +</button>
 <AddBook :authors="authors" :categories="categories"/>
 <div class="d-flex flex-wrap justify-content-center mx-3">
-    <BookComponent v-for="book in bookList.data" @click="goToLink(book.id)" :author="book.author.fullname" :book_id="book.id" :category="book.category.title" :title="book.title" class="cu-p" />
+    <BookComponent v-for="book in bookList.data" @click="goToLink(book.id)" :author="book.author.fullname" :book_id="book.id" :category="book.category.title" :title="book.title" :img="book.img" class="cu-p" />
 </div>
 <div class="pagination justify-content-center d-flex">
     <a v-for="page in bookList.links" :href="page.url" type="button" class="btn btn-outline-primary" :class="{active: page.active}" :key="page.id" ref="buttonRefs">{{buttonLabel(page.label)}}</a>
