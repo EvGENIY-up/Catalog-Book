@@ -38,8 +38,9 @@
                         <div class="form-text" >Подробное описание, не больше 2000 символов</div>
                     </div>
                     <div class="large-12 medium-12 small-12 cell">
-                        <label>Обложка
-                            <input type="file" id="file" ref="file" v-on:change="handleFileUpload()"/>
+                        <label class="d-flex">
+                            <input type="file" id="fileBook" name="fileBook" accept=".jpg, .jpeg, .png" ref="fulpoad" @change="onFileChange"/>
+                            <input class="sizeImg" v-model="formData.displayFileName" type="text" readonly/>
                         </label>
                     </div>
                     <div class="mb-3">
@@ -61,6 +62,9 @@ export default {
 
     data() {
         return {
+            formData: {
+                displayFileName: null,
+            },
             author_id: null,
             category_id: null,
             title: null,
@@ -78,10 +82,17 @@ export default {
         'categories',
     ],
     mounted() {
-        this.update()
     },
     methods: {
-        update: function () {
+        onFileChange(event) {
+            if (event.target.files && event.target.files.length) {
+                let file = event.target.files[0];
+
+                this.formData.displayFileName = '(' + this.calcSize(file.size) + 'Kb)';
+            }
+        },
+        calcSize(size) {
+            return Math.round(size / 1024);
         },
         createBook() {
             axios.post('/add', {

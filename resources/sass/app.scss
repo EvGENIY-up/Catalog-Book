@@ -121,3 +121,12 @@
    height: 40px;
    margin-right: 5px;
 }
+
+.sizeImg{
+  border: none;
+  outline: none;
+
+  &:active{
+    border: none;
+  };
+}
