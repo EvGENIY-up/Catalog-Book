@@ -111,7 +111,7 @@ class HomeController extends Controller
     {
         $request->validate([
             'id' => 'required|integer|exists:books,id',
-            'title' => 'required|string|max:150',
+            'title' => 'required|unique:books|string|max:150',
             'year' => 'required|integer|max_digits:4',
             'description' => 'required|string|max:2000',
             'author_id' => 'required|integer|exists:authors,id',

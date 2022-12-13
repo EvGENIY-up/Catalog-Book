@@ -34,7 +34,7 @@ class AdminController extends Controller
     public function addAuthor(Request $request)
     {
         $dataAuthor = $request->validate([
-            'fullname' => 'required|string|max:150',
+            'fullname' => 'required|unique:authors|string|max:150',
             'country' => 'required|string|max:100',
             'comment' => 'nullable|string|max:200',
         ]);
@@ -51,7 +51,7 @@ class AdminController extends Controller
     {
         $request->validate([
             'id' => 'required|integer|exists:authors,id',
-            'fullname' => 'required|string|max:150',
+            'fullname' => 'required|unique:authors|string|max:150',
             'country' => 'required|string|max:100',
             'comment' => 'nullable|string|max:200',
         ]);
@@ -86,7 +86,7 @@ class AdminController extends Controller
     public function addCategory(Request $request)
     {
         $dataCategory = $request->validate([
-            'title' => 'required|string|max:150',
+            'title' => 'required|unique:categories|string|max:150',
             'description' => 'required|string|max:500',
         ]);
         $newCategory = new Category($dataCategory);
@@ -102,7 +102,7 @@ class AdminController extends Controller
     {
         $request->validate([
             'id' => 'required|integer|exists:categories,id',
-            'title' => 'required|string|max:150',
+            'title' => 'required|unique:categories|string|max:150',
             'description' => 'required|string|max:500',
 
         ]);

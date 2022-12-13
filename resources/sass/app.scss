@@ -42,6 +42,7 @@
     padding: 10px;
     font-size: 16px;
     width: 200px;
+    outline: none
   }
 }
 
@@ -129,4 +130,12 @@
   &:active{
     border: none;
   };
+}
+
+.book-content__img{
+  border-radius: 15px;
+}
+
+.mini-book{
+   border-radius: 12px;
 }

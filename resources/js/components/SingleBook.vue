@@ -11,7 +11,7 @@
         </div>
     </div>
     <div class="change-book d-flex justify-content-end mx-3">
-        <button v-if="this.book_info.user_id === this.user_id || this.admin" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#changeBookModal">Редактировать</button>
+        <button v-if="this.book_info.user_id === this.user_id || this.admin" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editBookModal">Редактировать</button>
         <button v-if="this.book_info.user_id === this.user_id || this.admin" type="button" class="btn btn-danger mx-2" data-bs-toggle="modal" data-bs-target="#deleteBookModal">Удалить</button>
     </div>
     <ChangeBook :defaultTitle="book_info.title" :defaultYear="book_info.year"
